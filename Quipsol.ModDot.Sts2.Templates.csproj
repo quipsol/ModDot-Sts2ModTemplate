@@ -1,13 +1,13 @@
 <Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <PackageId>Alchyr.Sts2.Templates</PackageId>
-    <PackageVersion>2.5.2</PackageVersion>
-    <Title>Sts2 Mod Templates</Title>
-    <Authors>Alchyr</Authors>
+    <PackageId>Quipsol.ModDot.Sts2.Templates</PackageId>
+    <PackageVersion>0.1.0</PackageVersion>
+    <Title>ModDot Sts2 Mod Templates</Title>
+    <Authors>Quipsol</Authors>
     <Description>Templates to use when creating a Slay the Spire 2 mod</Description>
     <PackageTags>dotnet-new;templates;</PackageTags>
-    <PackageProjectUrl>https://github.com/Alchyr/ModTemplate-StS2/</PackageProjectUrl>
-    <PackageReleaseNotes>Change PatchAll to pass assembly directly instead of relying on harmony getting assembly through stack trace</PackageReleaseNotes>
+    <PackageProjectUrl>https://github.com/quipsol/ModDot-Sts2ModTemplate/</PackageProjectUrl>
+    <PackageReleaseNotes>none</PackageReleaseNotes>
     
     <PackageType>Template</PackageType>
     <TargetFramework>net9.0</TargetFramework>
@@ -19,6 +19,7 @@
     <PackageReadmeFile>README.md</PackageReadmeFile>
     <LocalizeTemplates>false</LocalizeTemplates>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
+    <RootNamespace>Quipsol.ModDot.Sts2.Templates</RootNamespace>
   </PropertyGroup>
 
   <ItemGroup>
@@ -26,7 +27,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Compile Include="content\ModTemplate\ModTemplateCode\Placeholder.cs" />
     <Content Include="content\**\*" Exclude="content\**\bin\**;content\**\obj\**;content\**\packages\**;content\**\.idea\**;content\**\.git\**" />
     <Compile Remove="**\*" />
   </ItemGroup>

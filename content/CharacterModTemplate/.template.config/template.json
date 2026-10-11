@@ -1,9 +1,9 @@
 {
-    "author": "Alchyr",
-    "name": "Slay the Spire 2 Character",
-    "description": "A Slay the Spire 2 character mod relying on BaseLib",
-    "identity": "Alchyr.Sts2CharMod",
-    "shortName": "alchyrsts2charmod",
+    "author": "Quipsol",
+    "name": "ModDot Sts2 Project - Character",
+    "description": "A Slay the Spire 2 character mod relying on BaseLib. Designed for use with ModDot.",
+    "identity": "Quipsol.Sts2CharMod",
+    "shortName": "quipsolsts2charmod",
     "tags": {
         "language": "C#",
         "type": "project"

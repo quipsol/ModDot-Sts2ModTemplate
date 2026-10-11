@@ -1,9 +1,9 @@
 {
-    "author": "Alchyr",
-    "name": "Slay the Spire 2 Content",
-    "description": "A Slay the Spire 2 content mod relying on BaseLib",
-    "identity": "Alchyr.Sts2ContentMod",
-    "shortName": "alchyrsts2contentmod",
+    "author": "Quipsol",
+    "name": "ModDot Sts2 Project - Content",
+    "description": "A Slay the Spire 2 content mod relying on BaseLib. Designed for use with ModDot.",
+    "identity": "Quipsol.Sts2ContentMod",
+    "shortName": "quipsolsts2contentmod",
     "tags": {
         "language": "C#",
         "type": "project"

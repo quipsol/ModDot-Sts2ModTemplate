@@ -1,9 +1,9 @@
 {
-    "author": "Alchyr",
-    "name": "Empty Slay the Spire 2 Mod",
-    "description": "An empty Slay the Spire 2 mod with BaseLib as a dependency.",
-    "identity": "Alchyr.Sts2Mod",
-    "shortName": "alchyrsts2mod",
+    "author": "Quipsol",
+    "name": "ModDot Sts2 Project - Empty",
+    "description": "An empty Slay the Spire 2 mod with BaseLib as a dependency. Designed for use with ModDot.",
+    "identity": "Quipsol.Sts2Mod",
+    "shortName": "quipsolsts2mod",
     "tags": {
         "language": "C#",
         "type": "project"
