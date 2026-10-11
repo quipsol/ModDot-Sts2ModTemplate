@@ -3,7 +3,7 @@ using Godot;
 using HarmonyLib;
 using MegaCrit.Sts2.Core.Modding;
 
-namespace ContentMod.ContentModCode;
+namespace ContentMod;
 
 //You're recommended but not required to keep all your code in this package and all your assets in the ContentMod folder.
 [ModInitializer(nameof(Initialize))]

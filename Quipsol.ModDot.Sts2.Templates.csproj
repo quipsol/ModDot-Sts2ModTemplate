@@ -36,4 +36,10 @@
     <None Include="bin\**" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="content\ContentModTemplate\ContentModCode\Core\Models\Cards\" />
+    <Folder Include="content\ContentModTemplate\ContentModCode\Core\Models\Powers\" />
+    <Folder Include="content\ContentModTemplate\ContentModCode\Core\Models\Relics\" />
+  </ItemGroup>
+
 </Project>

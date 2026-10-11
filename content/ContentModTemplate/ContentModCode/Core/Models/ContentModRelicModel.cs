@@ -1,8 +1,8 @@
 ﻿using BaseLib.Abstracts;
 using BaseLib.Extensions;
-using ContentMod.ContentModCode.Extensions;
+using ContentMod.Core.Extensions;
 
-namespace ContentMod.ContentModCode.Relics;
+namespace ContentMod.Core.Models;
 
 /// <summary>
 /// This is the base class for your mod's relics, which is set up to load the relic's images from your mod's resources.
@@ -10,7 +10,7 @@ namespace ContentMod.ContentModCode.Relics;
 /// This will generate a class that extends this one.
 /// You can also just create the class manually; just make sure to inherit from this class.
 /// </summary>
-public abstract class ContentModRelic : CustomRelicModel
+public abstract class ContentModRelicModel : CustomRelicModel
 {
     //ContentMod/images/relics
     public override string PackedIconPath => $"{Id.Entry.RemovePrefix().ToLowerInvariant()}.png".RelicImagePath();

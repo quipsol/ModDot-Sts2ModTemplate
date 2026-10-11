@@ -1,9 +1,9 @@
 ﻿using BaseLib.Abstracts;
 using BaseLib.Extensions;
-using ContentMod.ContentModCode.Extensions;
+using ContentMod.Core.Extensions;
 using MegaCrit.Sts2.Core.Entities.Powers;
 
-namespace ContentMod.ContentModCode.Powers;
+namespace ContentMod.Core.Models;
 
 /// <summary>
 /// This is the base class for your mod's powers, which is set up to load the power's images from your mod's resources.
@@ -11,7 +11,7 @@ namespace ContentMod.ContentModCode.Powers;
 /// This will generate a class that extends this one.
 /// You can also just create the class manually; just make sure to inherit from this class.
 /// </summary>
-public abstract class ContentModPower : CustomPowerModel
+public abstract class ContentModPowerModel : CustomPowerModel
 {
     //Loads from ContentMod/images/powers/your_power.png
     public override string CustomPackedIconPath => $"{Id.Entry.RemovePrefix().ToLowerInvariant()}.png".PowerImagePath();
