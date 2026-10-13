@@ -1,3 +1,16 @@
 {
-  
+  "{CharIdPrefix}-{CharIdEntry}.title": "The CharMod",
+  "{CharIdPrefix}-{CharIdEntry}.titleObject": "The CharMod",
+  "{CharIdPrefix}-{CharIdEntry}.description": "A new challenger.\nDescribe your character here.",
+  "{CharIdPrefix}-{CharIdEntry}.pronounSubject": "they",
+  "{CharIdPrefix}-{CharIdEntry}.pronounObject": "them",
+  "{CharIdPrefix}-{CharIdEntry}.possessiveAdjective": "their",
+  "{CharIdPrefix}-{CharIdEntry}.pronounPossessive": "theirs",
+  "{CharIdPrefix}-{CharIdEntry}.goldMonologue": "[sine]This gold will come in handy...[/sine]",
+  "{CharIdPrefix}-{CharIdEntry}.eventDeathPrevention": "Not yet. Not here.",
+  "{CharIdPrefix}-{CharIdEntry}.aromaPrinciple": "[sine]Onward, always onward.[/sine]",
+  "{CharIdPrefix}-{CharIdEntry}.cardsModifierTitle": "CharMod Cards",
+  "{CharIdPrefix}-{CharIdEntry}.cardsModifierDescription": "CharMod cards will now appear in rewards and shops.",
+  "{CharIdPrefix}-{CharIdEntry}.banter.alive.endTurnPing": "Hurry up.",
+  "{CharIdPrefix}-{CharIdEntry}.banter.dead.endTurnPing": "..."
 }

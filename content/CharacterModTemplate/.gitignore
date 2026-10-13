@@ -9,4 +9,8 @@ Properties/
 packages/
 .editorconfig
 *.user
+# MegaCrit resources
+/addons/
+# Machine specific settings
 Directory.Build.props
+override.cfg

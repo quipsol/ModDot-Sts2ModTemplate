@@ -1,3 +1,6 @@
 {
-  
+  "THE_ARCHITECT.talk.{CharIdPrefix}-{CharIdEntry}.0-0r.char": "Who are you?",
+  "THE_ARCHITECT.talk.{CharIdPrefix}-{CharIdEntry}.0-0r.next": "Continue",
+  "THE_ARCHITECT.talk.{CharIdPrefix}-{CharIdEntry}.0-1r.ancient": "Another one climbs the Spire...",
+  "THE_ARCHITECT.talk.{CharIdPrefix}-{CharIdEntry}.0-attack": "Attack"
 }

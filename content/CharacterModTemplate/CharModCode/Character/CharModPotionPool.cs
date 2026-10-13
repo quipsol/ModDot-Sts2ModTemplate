@@ -1,8 +1,8 @@
 ﻿using BaseLib.Abstracts;
-using CharMod.CharModCode.Extensions;
+using CharMod.Core.Extensions;
 using Godot;
 
-namespace CharMod.CharModCode.Character;
+namespace CharMod.Character;
 
 public class CharModPotionPool : CustomPotionPoolModel
 {

@@ -1,7 +1,7 @@
 {
     "author": "Quipsol",
-    "name": "ModDot Sts2 Project - Character",
-    "description": "A Slay the Spire 2 character mod relying on BaseLib. Designed for use with ModDot.",
+    "name": "MoDot Sts2 Project - Character",
+    "description": "A Slay the Spire 2 character mod relying on BaseLib. Designed for use with MoDot.",
     "identity": "Quipsol.Sts2CharMod",
     "shortName": "quipsolsts2charmod",
     "tags": {
@@ -55,6 +55,36 @@
             ],
             "replaces": "{NullableChecks}",
             "defaultValue": "enable"
+        },
+        "CharIdPrefix":{
+            "type": "generated",
+            "generator": "casing",
+            "parameters": {
+                "source": "name",
+                "toLower": false
+            },
+            "replaces": "{CharIdPrefix}",
+            "description": "The mod's id prefix of the character's localization keys, e.g. MYCHAR for MyChar."
+        },
+        "CharIdEntrySnake":{
+            "type": "generated",
+            "generator": "regex",
+            "parameters": {
+                "source": "name",
+                "steps": [
+                    { "regex": "([a-z0-9])([A-Z])", "replacement": "$1_$2" }
+                ]
+            }
+        },
+        "CharIdEntry":{
+            "type": "generated",
+            "generator": "casing",
+            "parameters": {
+                "source": "CharIdEntrySnake",
+                "toLower": false
+            },
+            "replaces": "{CharIdEntry}",
+            "description": "The character class's id in localization keys, e.g. MY_CHAR for MyChar."
         }
     }
 }

@@ -1,10 +1,10 @@
 ﻿using BaseLib.Abstracts;
 using BaseLib.Extensions;
 using BaseLib.Utils;
-using CharMod.CharModCode.Character;
-using CharMod.CharModCode.Extensions;
+using CharMod.Character;
+using CharMod.Core.Extensions;
 
-namespace CharMod.CharModCode.Relics;
+namespace CharMod.Core.Models;
 
 /// <summary>
 /// This is the base class for your mod's relics, which is set up to load the relic's images from your mod's resources.
@@ -16,7 +16,7 @@ namespace CharMod.CharModCode.Relics;
 /// that your relics don't need to invidually say which pool they should be in.
 /// </summary>
 [Pool(typeof(CharModRelicPool))]
-public abstract class CharModRelic : CustomRelicModel
+public abstract class CharModRelicModel : CustomRelicModel
 {
     public override string PackedIconPath => $"{Id.Entry.RemovePrefix().ToLowerInvariant()}.png".RelicImagePath();
     protected override string PackedIconOutlinePath => $"{Id.Entry.RemovePrefix().ToLowerInvariant()}_outline.png".RelicImagePath();

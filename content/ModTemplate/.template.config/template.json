@@ -1,7 +1,7 @@
 {
     "author": "Quipsol",
-    "name": "ModDot Sts2 Project - Empty",
-    "description": "An empty Slay the Spire 2 mod with BaseLib as a dependency. Designed for use with ModDot.",
+    "name": "MoDot Sts2 Project - Empty",
+    "description": "An empty Slay the Spire 2 mod with BaseLib as a dependency. Designed for use with MoDot.",
     "identity": "Quipsol.Sts2Mod",
     "shortName": "quipsolsts2mod",
     "tags": {

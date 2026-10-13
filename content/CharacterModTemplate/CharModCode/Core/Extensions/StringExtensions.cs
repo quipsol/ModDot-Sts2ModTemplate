@@ -1,6 +1,6 @@
 ﻿using Godot;
 
-namespace CharMod.CharModCode.Extensions;
+namespace CharMod.Core.Extensions;
 
 //Mostly utilities to get asset paths.
 public static class StringExtensions

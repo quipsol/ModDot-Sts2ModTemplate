@@ -53,6 +53,7 @@ project/assembly_name="ContentMod"
 [editor]
 
 export/convert_text_resources_to_binary=false
+pre_patches/enabled=PackedStringArray("modot.baselib.modeldbpreload", "modot.native.separateprojectmods")
 
 [editor_overrides]
 

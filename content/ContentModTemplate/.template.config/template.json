@@ -1,7 +1,7 @@
 {
     "author": "Quipsol",
-    "name": "ModDot Sts2 Project - Content",
-    "description": "A Slay the Spire 2 content mod relying on BaseLib. Designed for use with ModDot.",
+    "name": "MoDot Sts2 Project - Content",
+    "description": "A Slay the Spire 2 content mod relying on BaseLib. Designed for use with MoDot.",
     "identity": "Quipsol.Sts2ContentMod",
     "shortName": "quipsolsts2contentmod",
     "tags": {

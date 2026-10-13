@@ -2,21 +2,24 @@
     <Import Project=".\Sts2PathDiscovery.props"/>
     <PropertyGroup>
         <TargetFramework>net9.0</TargetFramework>
+        <LangVersion>preview</LangVersion>
+        <EnablePreviewFeatures>true</EnablePreviewFeatures>
         <ImplicitUsings>true</ImplicitUsings>
         <Nullable>{NullableChecks}</Nullable> <!--Makes code analysis regarding null values stricter.-->
         <Publicize>{PublicizeSts}</Publicize> <!--Allows access to originally private/protected members but may (unlikely to) cause errors.-->
         <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
-        
+
         <AppOutputBase>$(MSBuildProjectDirectory)\</AppOutputBase>
         <PathMap>$(AppOutputBase)=.\</PathMap>
         <GodotDisabledSourceGenerators>GodotPluginsInitializer</GodotDisabledSourceGenerators>
-    </PropertyGroup>
-
-    <PropertyGroup>
         <!-- Diasble architecture mismatch warning; mods are ideally built for all platforms (MSIL)
-             while your local StS2 version will be for your specific platform. -->
-        <NoWarn>$(NoWarn);MSB3270</NoWarn> 
+                while your local StS2 version will be for your specific platform. -->
+        <NoWarn>$(NoWarn);MSB3270</NoWarn>
+        <!-- STS002 (ModAnalyzers): fails the build while the mod has no localization files at all, as an empty mod does.
+             Once you add ModTemplate/localization/, you can remove this. -->
+        <NoWarn>$(NoWarn);STS002</NoWarn>
     </PropertyGroup>
+    
 
     <ItemGroup Condition="Exists('$(Sts2DataDir)')" >
         <Reference Include="0Harmony">
@@ -47,18 +50,21 @@
         <Compile Remove="materials/**" />
         <Compile Remove="shaders/**" />
         <Compile Remove="images/**" />
+        <Compile Remove="addons/**"/>
+        <Compile Condition="'$(Configuration)' != 'Debug'" Remove="editor/**"/>
         <EmbeddedResource Remove="ModTemplate/**" />
         <EmbeddedResource Remove="materials/**" />
         <EmbeddedResource Remove="shaders/**" />
         <EmbeddedResource Remove="images/**" />
-    </ItemGroup>
-
-    <ItemGroup>
+        <EmbeddedResource Remove="addons/**"/>
         <None Condition="Exists('Directory.Build.props')" Include="Directory.Build.props"/>
         <None Include=".gitignore" />
+        <None Include="override.cfg"/>
         <None Include="ModTemplate.json" />
         <None Include="project.godot"/>
         <None Include="ModTemplate/**" />
+        <None Include="build/**"/>
+        <None Include="editor/**"/>
     </ItemGroup>
     
     <Target Name="CheckDependencyPaths" >
@@ -91,7 +97,22 @@
                  Importance="high" />
     </Target>
 
-    <Target Name="CopyToModsFolderOnBuild" AfterTargets="PostBuildEvent">
+    <!-- The editor-player loads only mods/_Always and mods/<Project>Mods (pre-patch modot.native.separateprojectmods),
+         so this project's own mod goes to mods/<Project>Mods/<Project>/. -->
+    <PropertyGroup>
+        <GodotModFolder>$(GodotModsPath)$(MSBuildProjectName)Mods/$(MSBuildProjectName)/</GodotModFolder>
+    </PropertyGroup>
+
+    <!-- Debug builds contain the editor-only code. Debug config goes to GoDot path, others go to Sts2 path -->
+    <Target Name="CopyToGodotModsFolderOnBuild" AfterTargets="PostBuildEvent"
+            Condition="'$(Configuration)' == 'Debug' and '$(GodotModsPath)' != ''">
+        <Message Text="Copying .dll .pdb and .json to the Godot mods folder ($(GodotModFolder))." Importance="high" />
+        <Copy SourceFiles="$(TargetPath)" DestinationFolder="$(GodotModFolder)" />
+        <Copy SourceFiles="$(AssemblyName).json" DestinationFolder="$(GodotModFolder)" />
+        <Copy SourceFiles="$(TargetDir)$(TargetName).pdb" DestinationFolder="$(GodotModFolder)" />
+    </Target>
+    <Target Name="CopyToSts2ModsFolderOnBuild" AfterTargets="PostBuildEvent"
+        Condition="'$(Configuration)' != 'Debug'">
         <Message Text="Copying .dll .pdb and .json to mods folder." Importance="high" />
         <Copy SourceFiles="$(TargetPath)" DestinationFolder="$(ModsPath)$(MSBuildProjectName)/" />
         <Copy SourceFiles="$(AssemblyName).json" DestinationFolder="$(ModsPath)$(MSBuildProjectName)/" />
@@ -108,11 +129,28 @@
         <Error Text=" Godot path must be set up before publishing; Godot not found at path '$(GodotPath)'. Check Directory.Build.props file."
                Condition="'$(GodotPath)' == '' or !Exists('$(GodotPath)')"/>
     </Target>
-
-    <Target Name="GodotPublish" AfterTargets="Publish" Condition="'$(GodotPath)' != '' and Exists('$(GodotPath)') and '$(IsInnerGodotExport)' != 'true'">
-        <Message Text="Exporting Godot .pck to mods folder" Importance="high"/>
-        <Exec Command="&quot;$(GodotPath)&quot; --headless --export-pack &quot;BasicExport&quot; &quot;$(ModsPath)$(MSBuildProjectName)/$(MSBuildProjectName).pck&quot;"
-              EnvironmentVariables="IsInnerGodotExport=true;MSBUILDDISABLENODEREUSE=1"
-              ContinueOnError="WarnAndContinue"/>
+    
+    <!-- Make sure the mod's assets are imported (.godot/imported) before packing them. -->
+    <Target Name="GodotImport" BeforeTargets="GodotPublish" Condition="'$(GodotPath)' != '' and Exists('$(GodotPath)') and '$(IsInnerGodotExport)' != 'true'">
+        <Exec Command="&quot;$(GodotPath)&quot; --headless --audio-driver Dummy --path &quot;$(MSBuildProjectDirectory)&quot; --import --quit"
+              EnvironmentVariables="IsInnerGodotExport=true;MSBUILDDISABLENODEREUSE=1" IgnoreExitCode="true" IgnoreStandardErrorWarningFormat="true" />
     </Target>
+    
+    <Target Name="GodotPublish" AfterTargets="Publish" Condition="'$(GodotPath)' != '' and Exists('$(GodotPath)') and '$(IsInnerGodotExport)' != 'true'">
+        <Message Text="Packing $(MSBuildProjectName)/ into $(ModsPath)$(MSBuildProjectName)/$(MSBuildProjectName).pck" Importance="high" />
+        <Exec Command="&quot;$(GodotPath)&quot; --headless --audio-driver Dummy --path &quot;$(MSBuildProjectDirectory)&quot; -s build/pack_mod.gd -- &quot;$(ModsPath)$(MSBuildProjectName)/$(MSBuildProjectName).pck&quot; &quot;$(MSBuildProjectName)&quot;"
+              EnvironmentVariables="IsInnerGodotExport=true;MSBUILDDISABLENODEREUSE=1"
+              IgnoreStandardErrorWarningFormat="true" />
+        <!-- Also give the editor-player the pack, so the manifest's has_pck is satisfied there. -->
+        <Copy SourceFiles="$(ModsPath)$(MSBuildProjectName)/$(MSBuildProjectName).pck"
+              DestinationFolder="$(GodotModFolder)"
+              Condition="'$(GodotModsPath)' != ''" />
+    </Target>
+
+
+    <!-- The game's Sentry addon auto-injects this import when the editor opens the project. -->
+    <Import Project="addons/sentry/dotnet/Sentry.Godot.props" Condition="Exists('addons/sentry/dotnet/Sentry.Godot.props')" />
+    <ItemGroup>
+        <PackageReference Remove="Sentry" />
+    </ItemGroup>
 </Project>

@@ -3,7 +3,7 @@ using Godot;
 using HarmonyLib;
 using MegaCrit.Sts2.Core.Modding;
 
-namespace CharMod.CharModCode;
+namespace CharMod;
 
 //You're recommended but not required to keep all your code in this package and all your assets in the CharMod folder.
 [ModInitializer(nameof(Initialize))]

@@ -1,11 +1,11 @@
 ﻿using BaseLib.Abstracts;
 using BaseLib.Extensions;
 using BaseLib.Utils;
-using CharMod.CharModCode.Character;
-using CharMod.CharModCode.Extensions;
+using CharMod.Character;
+using CharMod.Core.Extensions;
 using MegaCrit.Sts2.Core.Entities.Cards;
 
-namespace CharMod.CharModCode.Cards;
+namespace CharMod.Core.Models;
 
 /// <summary>
 /// This is the base class for your mod's cards, which is set up to load the card's images from your mod's resources.
@@ -14,7 +14,7 @@ namespace CharMod.CharModCode.Cards;
 /// You can also just create the class manually; just make sure to inherit from this class.
 /// </summary>
 [Pool(typeof(CharModCardPool))]
-public abstract class CharModCard(int cost, CardType type, CardRarity rarity, TargetType target) :
+public abstract class CharModCardModel(int cost, CardType type, CardRarity rarity, TargetType target) :
     CustomCardModel(cost, type, rarity, target)
 {
     //Image size:
