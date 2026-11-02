@@ -4,10 +4,10 @@
     <PackageVersion>0.1.0</PackageVersion>
     <Title>MoDot Sts2 Mod Templates</Title>
     <Authors>Quipsol</Authors>
-    <Description>Templates to use when creating a Slay the Spire 2 mod</Description>
+    <Description>Templates to use when creating a Slay the Spire 2 mod while using the MoDot fork</Description>
     <PackageTags>dotnet-new;templates;</PackageTags>
     <PackageProjectUrl>https://github.com/quipsol/ModDot-Sts2ModTemplate/</PackageProjectUrl>
-    <PackageReleaseNotes>none</PackageReleaseNotes>
+    <PackageReleaseNotes>First release: Empty, Content and Character mod templates for MoDot 4.5.1-m1. See https://github.com/quipsol/ModDot-Sts2ModTemplate/releases</PackageReleaseNotes>
     
     <PackageType>Template</PackageType>
     <TargetFramework>net9.0</TargetFramework>
@@ -27,7 +27,9 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Content Include="content\**\*" Exclude="content\**\bin\**;content\**\obj\**;content\**\packages\**;content\**\.idea\**;content\**\.git\**" />
+    <!-- NuGet appends each file's path below content\ to PackagePath, so the templates land in content/<Template>/
+         (without it, content/content/<Template>/). -->
+    <Content Include="content\**\*" Exclude="content\**\bin\**;content\**\obj\**;content\**\packages\**;content\**\.idea\**;content\**\.git\**" PackagePath="content\" />
     <Compile Remove="**\*" />
   </ItemGroup>
 
